@@ -4,27 +4,39 @@
 
 ### Reflection
 
-###1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
+###1. Pipeline Description.
 
 My pipeline applies 5 modifications to each image.  First the image is converted to grayscale, then a gaussian blur is applied to reduce any "noise" in the lines of the image.  Canny edge detection is then applied to detect the edges in the image, with the intent of highlighting the road lines.  A region of interest is then selected, and is based on the dimensions of the image.  A Hough transform is then used to identify paramters for the road lines.
 
 In order to draw a single line on the left and right lanes, I modified the draw_lines() function to first separate the slopes into positive and negative lists.  From these lists I averaged the slopes, then found the points with the highest and lowest y values for each average slope.  I knew that I wanted the highest y value to be at the bottom of the image because that is where the lane lines originate.  I also knew that I wanted the lowest y value of the lane lines to be bound by the region of interest.  With these y values, the average slope, and a coordinate from the Hough transform, I used the get_x_from_slope() function to determine the x value for the highest and lowest y point.  The left and right lane lines were drawn by using the average slope to calculate the high and low points that are bound by the region of interest.
 
 #### Steps
-![Step 1][./writeup_images/grayscale.jpg]
+[Step 1][/writeup_images/grayscale.jpg]
+<img src="/writeup_images/grayscale.jpg" alt="Grayscale" />
 In Step 1, the image is converted to grayscale in order to eliminate excess noise in the image that are not lane lines.
-![Step 2][./writeup_images/gaussian.jpg]
+
+[Step 2][./writeup_images/gaussian.jpg]
+
 In Step 2, a gaussian blur is applied to the grayscale image, in order to further eliminate noise in the more defined lines in the image.
-![Step 3][./writeup_images/canny.jpg]
+
+[Step 3][./writeup_images/canny.jpg]
+
 In Step 3, canny edge detection is applied to the image to highlight the edges in the image and further identify lane lines.
-![Step 4a][./writeup_images/region0.jpg]
+
+[Step 4a][./writeup_images/region0.jpg]
+
 In Step 4a, the region of interest is shown.  This region is based on the height of the image, and assumes that the center of the lane is in the center of the image (in the x direction).
-![Step 4b][./writeup_images/region.jpg]
+
+[Step 4b][./writeup_images/region.jpg]
+
 In Step 4b, the region of interest is shown when applied to the image showing canny edge detection.
-![Step 5][./writeup_images/hough.jpg]
+
+[Step 5][./writeup_images/hough.jpg]
+
 In Step 5, a Hough transform is applied on the edge detected image.  Within the Hough function, is also the draw_lines() function which two lane lines each with a slope that has been averaged from various lines.
 
-![Output][./writeup_images/overlay.jpg]
+[Output][./writeup_images/overlay.jpg]
+
 Here is the final output, which overlays the calculated average lane lines with the original image.
 
 
