@@ -12,7 +12,9 @@ In order to draw a single line on the left and right lanes, I modified the draw_
 
 #### Steps
 [Step 1][/writeup_images/grayscale.jpg]
+
 <img src="/writeup_images/grayscale.jpg" alt="Grayscale" />
+
 In Step 1, the image is converted to grayscale in order to eliminate excess noise in the image that are not lane lines.
 
 [Step 2][./writeup_images/gaussian.jpg]
